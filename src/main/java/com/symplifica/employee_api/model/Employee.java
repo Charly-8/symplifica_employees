@@ -1,43 +1,36 @@
 package com.symplifica.employee_api.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
+@Data
 @Entity
 @Table(name="employees")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEmpleado;
+    private Long employeeId;
 
-    @Column(name="nombre_beneficio", nullable = false)
-    private String nombreBeneficio;
+    @Column(name="employee_first_name", nullable = false)
+    private String employeeFirstName;
 
-    @Column(name="monto", nullable = false, scale = 2)
-    private BigDecimal monto;
+    @Column(name="employee_second_name", nullable = false)
+    private String employeeSecondName;
 
-    // Getters
+    @Column(name="employee_first_last_name", nullable = false)
+    private String employeeFirstLastName;
 
-    public Long getId() {
-        return this.idEmpleado;
-    }
+    @Column(name="employee_second_last_name", nullable = false)
+    private String employeeSecondLastName;
 
-    public String getNombreBeneficio() {
-        return this.nombreBeneficio;
-    }
+    @Column(name="email")
+    private String email;
 
-    public BigDecimal getMonto() {
-        return this.monto;
-    }
+    @Column(name="city")
+    private String city;
 
-    // Setters
-
-    public void setNombreBeneficio(String nombreBeneficio) {
-        this.nombreBeneficio = nombreBeneficio;
-    }
-
-    public void setMonto(BigDecimal monto) {
-        this.monto = monto;
-    }
+    @Column(name="creation_date")
+    private LocalDateTime creationDate;
 }
