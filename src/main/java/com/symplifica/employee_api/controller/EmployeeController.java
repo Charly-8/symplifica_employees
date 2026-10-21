@@ -1,7 +1,8 @@
 package com.symplifica.employee_api.controller;
 
-import com.symplifica.employee_api.model.Employee;
-import com.symplifica.employee_api.repository.EmployeeRepository;
+
+import com.symplifica.employee_api.dto.employee.EmployeeRequestDto;
+import com.symplifica.employee_api.dto.employee.EmployeeResponseDto;
 import com.symplifica.employee_api.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,32 +18,33 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    // Get all employees
     @GetMapping
-    public List<Employee> getEmployee() {
-        return employeeService.getAllEmployees();
-    }
-
-    // Get employee by id
-    @GetMapping("/{id}")
-    public Employee getEmployeeById(@PathVariable Long id) {
-        return employeeService.getEmployeeById(id);
+    public List<EmployeeResponseDto> getAllEmployees() {
+        return employeeService.getEmployees();
     }
 
     // Create employee
     @PostMapping
-    public Employee createEmployee(@RequestBody Employee employee) {
-        return employeeService.createEmployee(employee);
+    public EmployeeResponseDto addNewEmployee(@RequestBody EmployeeRequestDto newEmployee) {
+        return employeeService.addEmployee(newEmployee);
     }
 
-    @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee employeeUpdated) {
-        return employeeService.updateEmployee(id, employeeUpdated);
+    //Get employee by id
+    @GetMapping("/{id}")
+    public EmployeeResponseDto getEmployeeId(@PathVariable long id) {
+        return employeeService.getEmployeeById(id);
     }
 
-    // Delete employee
+    // Update
+    @PostMapping("/{id}")
+    public EmployeeResponseDto updateEmployee(@PathVariable long id, @RequestBody EmployeeRequestDto employeeToUpdate) {
+        return employeeService.updateEmployee(id, employeeToUpdate);
+    }
+
+    // Delete
     @DeleteMapping("/{id}")
-    public void deleteEmployee(@PathVariable Long id) {
+    public void deleleteEmployeeById(@PathVariable long id) {
         employeeService.deleteEmployee(id);
     }
+
 }
